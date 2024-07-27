@@ -16,6 +16,7 @@ This project provides a parser for fixed-width files and converts them into CSV 
 
 ### With Docker
 
+```
 1. **Build the Docker Image**:
    ```sh
    docker build -t fixed-width-parser .
@@ -23,7 +24,14 @@ This project provides a parser for fixed-width files and converts them into CSV 
 
 2. **Run the Docker Container**:
    ```sh
-   docker run --rm -v $(pwd):/app fixed-width-parser python fixed_width_parser.py spec.txt data.txt output.csv errors.txt summary.csv --output-format csv --summary-format csv
+   docker run --rm -v $(pwd):/app fixed-width-parser \
+    --spec-file /app/spec.txt \
+    --fixed-width-file /app/input.txt \
+    --output-file /app/output.csv \
+    --error-file /app/error.log \
+    --summary-file /app/summary.csv \
+    --output-format csv \
+    --summary-format csv
    ```
 
 ### Without Docker
@@ -40,11 +48,11 @@ This project provides a parser for fixed-width files and converts them into CSV 
 
 ## Command Line Arguments
 
-- `SPEC_FILE`: Path to the specification file (e.g., `spec.txt`).
-- `FIXED_WIDTH_FILE`: Path to the fixed-width file to parse (e.g., `data.txt`).
-- `OUTPUT_FILE`: Path to the output file in CSV or JSON format (e.g., `output.csv` or `output.json`).
-- `ERROR_FILE`: Path to the error log file (e.g., `errors.txt`).
-- `SUMMARY_FILE`: Path to the summary file in CSV or JSON format (e.g., `summary.csv` or `summary.json`).
+- `--SPEC_FILE`: Path to the specification file (e.g., `spec.txt`).
+- `--FIXED_WIDTH_FILE`: Path to the fixed-width file to parse (e.g., `data.txt`).
+- `--OUTPUT_FILE`: Path to the output file in CSV or JSON format (e.g., `output.csv` or `output.json`).
+- `--ERROR_FILE`: Path to the error log file (e.g., `errors.txt`).
+- `--SUMMARY_FILE`: Path to the summary file in CSV or JSON format (e.g., `summary.csv` or `summary.json`).
 - `--output-format FORMAT`: Output file format (`csv` or `json`, default: `csv`).
 - `--summary-format FORMAT`: Summary file format (`csv` or `json`, default: `csv`).
 
