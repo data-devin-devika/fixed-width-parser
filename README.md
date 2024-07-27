@@ -1,81 +1,76 @@
+```markdown
 # Fixed Width Parser
 
-This project provides a parser for handling fixed-width files and converting them into delimited files like CSV or JSON. It includes a Docker setup for easy execution of the code.
+This project provides a parser for fixed-width files and converts them into CSV or JSON formats. It includes Docker support for easy execution.
 
 ## Project Structure
 
-	•	fixed_width_parser.py
-	•	Dockerfile
-	•	requirements.txt
-	•	spec.txt
-	•	data.txt
-	•	README.md
+- `fixed_width_parser.py`: Python script for parsing.
+- `Dockerfile`: Docker container setup.
+- `requirements.txt`: Python dependencies.
+- `spec.txt`: Example specification file.
+- `data.txt`: Example fixed-width data file.
+- `README.md`: Project documentation.
 
-## Features
+## Setup and Usage
 
-- Parses fixed-width files based on a specification file.
-- Generates output in CSV or JSON format.
-- Logs errors encountered during parsing.
-- Creates a summary file with parsed and error statistics.
-- Docker support for easy execution.
-
-## Requirements
-
-- Python 3.x
-- Docker (optional, for containerized execution)
-
-## Setup
-
-### Running with Docker
+### With Docker
 
 1. **Build the Docker Image**:
    ```sh
    docker build -t fixed-width-parser .
+   ```
 
-2.	Run the Docker Container:
-docker run --rm -v $(pwd):/app fixed-width-parser
+2. **Run the Docker Container**:
+   ```sh
+   docker run --rm -v $(pwd):/app fixed-width-parser python fixed_width_parser.py spec.txt data.txt output.csv errors.txt summary.csv --output-format csv --summary-format csv
+   ```
 
-3.	Custom Command Example:
+### Without Docker
 
-docker run --rm -v $(pwd):/app fixed-width-parser python fixed_width_parser.py spec.txt data.txt output.json errors.txt summary.json --output-format json --summary-format json
+1. **Install Dependencies**:
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-Usage
+2. **Run the Script**:
+   ```sh
+   python fixed_width_parser.py spec.txt data.txt output.csv errors.txt summary.csv --output-format csv --summary-format csv
+   ```
 
-python fixed_width_parser.py [SPEC_FILE] [FIXED_WIDTH_FILE] [OUTPUT_FILE] [ERROR_FILE] [SUMMARY_FILE] [--output-format FORMAT] [--summary-format FORMAT]
+## Command Line Arguments
 
-	•	SPEC_FILE: Path to the specification file (e.g., spec.txt).
-	•	FIXED_WIDTH_FILE: Path to the fixed-width file to parse (e.g., data.txt).
-	•	OUTPUT_FILE: Path to the output file in CSV or JSON format (e.g., output.csv or output.json).
-	•	ERROR_FILE: Path to the error log file (e.g., errors.txt).
-	•	SUMMARY_FILE: Path to the summary file in CSV or JSON format (e.g., summary.csv or summary.json).
-	•	--output-format FORMAT: The format for the output file. Options are csv or json (default: csv).
-	•	--summary-format FORMAT: The format for the summary file. Options are csv or json (default: csv).
+- `SPEC_FILE`: Path to the specification file (e.g., `spec.txt`).
+- `FIXED_WIDTH_FILE`: Path to the fixed-width file to parse (e.g., `data.txt`).
+- `OUTPUT_FILE`: Path to the output file in CSV or JSON format (e.g., `output.csv` or `output.json`).
+- `ERROR_FILE`: Path to the error log file (e.g., `errors.txt`).
+- `SUMMARY_FILE`: Path to the summary file in CSV or JSON format (e.g., `summary.csv` or `summary.json`).
+- `--output-format FORMAT`: Output file format (`csv` or `json`, default: `csv`).
+- `--summary-format FORMAT`: Summary file format (`csv` or `json`, default: `csv`).
 
+## Example Files
 
-Example Specification File (spec.txt)
+- **Specification File (`spec.txt`)**:
+  ```
+  name:10
+  address:20
+  age:3
+  ```
 
-name:10
-address:20
-age:3
+- **Fixed-Width File (`data.txt`)**:
+  ```
+  satish      123 Main St       25
+  drit        456 gnt rd        30
+  nrt         789 nrt Rd        22
+  ```
 
+## Output
 
-Example Fixed-Width File (data.txt)
+- **Output File**: Parsed data in CSV or JSON format.
+- **Error File**: Lines that did not match the expected length.
+- **Summary File**: Statistics about the parsing process.
 
-satish      123 Main St          25
-drti        456 NRT Ave          30
-sdtr        789 gut  Rd          22
+## License
 
-
-Output
-
-	•	Output File: Contains parsed data in the specified format (CSV or JSON).
-	•	Error File: Contains lines that did not match the expected length.
-	•	Summary File: Contains statistics about the parsing process (number of total lines, parsed lines, and error lines).
-
-Error Handling
-
-Errors encountered during parsing will be logged in the specified error file. The summary file will provide a count of total lines processed, parsed successfully, and those that encountered errors.
-
-Contributing
-
-Feel free to open an issue or submit a pull request if you find any bugs or have suggestions for improvements.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+```
