@@ -1,3 +1,0 @@
-John      123 Main St          25
-Alice     456 Oak Ave          30
-Bob       789 Pine Rd          22
