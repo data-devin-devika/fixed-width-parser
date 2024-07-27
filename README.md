@@ -25,10 +25,11 @@ This project provides a parser for fixed-width files and converts them into CSV 
 2. **Run the Docker Container**:
    ```sh
    docker run --rm -v $(pwd):/app fixed-width-parser \
+    python fixed_width_parser.py \
     --spec-file /app/spec.txt \
-    --fixed-width-file /app/input.txt \
+    --fixed-width-file /app/data.txt \
     --output-file /app/output.csv \
-    --error-file /app/error.log \
+    --error-file /app/errors.txt \
     --summary-file /app/summary.csv \
     --output-format csv \
     --summary-format csv
